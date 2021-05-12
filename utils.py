@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 #+ Autor:	Ran#
 #+ Creado:	12/05/2021 17:49:06
-#+ Editado:	12/05/2021 18:45:54
+#+ Editado:	12/05/2021 20:00:58
 
 import os
 
@@ -30,8 +30,9 @@ def cargarConfig(nome_ficheiro='.config', elemento=0):
     try:
         for dato in cargarFich(nome_ficheiro).split('\n')[:-1]:
             try:
-                dato1, dato2 = dato.strip().split('=')
-                config[dato1.strip()] = dato2.strip()
+                if (not dato.startswith('#')) and dato != '':
+                    dato1, dato2 = dato.strip().split('=')
+                    config[dato1.strip()] = dato2.strip()
             except:
                 sys.exit('ERRO: Pon o identificador e un igual (=) e o seu valor')
     except:
