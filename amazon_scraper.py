@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #+ Autor:	Ran#
 #+ Creado:	11/05/2021 13:31:33
-#+ Editado:	12/05/2021 18:16:26
+#+ Editado:	12/05/2021 20:46:10
 
 import utils as u
 
@@ -34,6 +34,7 @@ def printInfo(tit, prezo_antes, prezo, lig_imaxe, ref_lig):
 
 # dada unha ligazón simplificaa e devolve a de referal
 def tratarLigazon(ligazon, ref_code):
+    aod = '&aod=1' in ligazon
     cachos_ligazon = ligazon.split('?')[0].split('/')
 
     amazon = [ama for ama in cachos_ligazon if 'www.amazon' in ama][0]
@@ -49,13 +50,15 @@ def tratarLigazon(ligazon, ref_code):
     except:
         ligazon = 'https://'+amazon+'/dp/'+cachos_ligazon[cachos_ligazon.index('gp')+2]
 
-    ref_lig = ligazon+'?&linkCode=ll1&tag='+ref_code+'&language='+idioma+'&ref_=as_li_ss_tl'
-    #&aod=1
+    if aod:
+        ref_lig = ligazon+'?linkCode=ll1&tag='+ref_code+'&language='+idioma+'&ref_=as_li_ss_tl&keywords=TELEGRAM%20@chollos_telegram&aod=1'
+    else:
+        ref_lig = ligazon+'?linkCode=ll1&tag='+ref_code+'&language='+idioma+'&ref_=as_li_ss_tl&keywords=TELEGRAM%20@chollos_telegram'
 
     return ligazon, ref_lig
 
 # print info produto
-def getInfo(ligazon):
+def getInfoAmazon(ligazon):
     # variables precisas para poder facer os scrapping en amazon
     cabeceira = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/90.0.4430.93 Safari/537.36'
@@ -86,16 +89,31 @@ def getInfo(ligazon):
 
     # sacar ligazón da imaxe
     lig_imaxe = soup.find(class_='a-dynamic-image')['data-a-dynamic-image'].split('"')[1]
+
+
+    print(soup.find(class_='a-icon-alt').get_text(),'\u2B50')
+    """
+    ligazon += '?aod=1'
+    pax = r.get(ligazon, headers=cabeceira, cookies=bolacha)
+    soup = bs(pax.content, 'html.parser')
+
+    print(soup.find(class_='a-icon-alt').get_text())
     
+    proba = soup.find_all(id='aod-offer-price')
+    print(proba)
+    """
+
     return tit, prezo_antes, prezo, lig_imaxe
 
 if __name__ == '__main__':
     print()
+
     id_afiliado = u.cargarConfig('.config', 1)
 
     ligazon = getOpcions()
     ligazon, ref_lig = tratarLigazon(ligazon, id_afiliado)
+    tit, prezo_antes, prezo, lig_imaxe = getInfoAmazon(ligazon)
 
-    tit, prezo_antes, prezo, lig_imaxe = getInfo(ligazon)
     printInfo(tit, prezo_antes, prezo, lig_imaxe, ref_lig)
+
     print()
