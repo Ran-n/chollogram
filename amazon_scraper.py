@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #+ Autor:	Ran#
 #+ Creado:	11/05/2021 13:31:33
-#+ Editado:	12/05/2021 20:46:10
+#+ Editado:	18/05/2021 16:54:32
 
 import utils as u
 
@@ -90,18 +90,6 @@ def getInfoAmazon(ligazon):
     # sacar ligazón da imaxe
     lig_imaxe = soup.find(class_='a-dynamic-image')['data-a-dynamic-image'].split('"')[1]
 
-
-    print(soup.find(class_='a-icon-alt').get_text(),'\u2B50')
-    """
-    ligazon += '?aod=1'
-    pax = r.get(ligazon, headers=cabeceira, cookies=bolacha)
-    soup = bs(pax.content, 'html.parser')
-
-    print(soup.find(class_='a-icon-alt').get_text())
-    
-    proba = soup.find_all(id='aod-offer-price')
-    print(proba)
-    """
 
     return tit, prezo_antes, prezo, lig_imaxe
 
