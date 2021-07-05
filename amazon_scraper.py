@@ -3,14 +3,16 @@
 #------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	11/05/2021 13:31:33
-#+ Editado:	28/06/2021 13:51:03
+#+ Editado:	05/07/2021 20:14:06
 #------------------------------------------------------------------------------------------------
-import utils as u
 import requests as r
 import sys
 from bs4 import BeautifulSoup as bs
 import os
 from fake_useragent import UserAgent
+
+from uteis.catex import riscar
+import utils as u
 #------------------------------------------------------------------------------------------------
 # coller as opcións dadas na entrada
 def getOpcions():
@@ -86,9 +88,9 @@ def getInfoAmazon(ligazon):
     # sacar o prezo anterior se o ten
     prezo_antes = soup.find(class_='priceBlockStrikePriceString a-text-strike')
     if prezo_antes:
-        prezo_antes = u.tachar(prezo_antes.get_text().strip())
+        prezo_antes = riscar(prezo_antes.get_text().strip())
     else:
-        prezo_antes = u.tachar('Non Disponhible')
+        prezo_antes = riscar('Non Disponhible')
 
     # sacar ligazón da imaxe
     lig_imaxe = soup.find(class_='a-dynamic-image')['data-a-dynamic-image'].split('"')[1]

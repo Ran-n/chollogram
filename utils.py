@@ -3,27 +3,11 @@
 # -----------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	12/05/2021 17:49:06
-#+ Editado:	05/07/2021 17:05:08
+#+ Editado:	05/07/2021 20:21:36
 # -----------------------------------------------------------------------------------------
-import os
+from uteis.ficheiro import cargar
 import sys
 # -----------------------------------------------------------------------------------------
-# colle un ficheiro e carga o seu contido
-def cargarFich(nome_fich, encoding='utf-8-sig'):
-        if not os.path.isfile(nome_fich):
-            sys.exit('ERRO: Crea un ficheiro chamado id_afiliado.config que conteña o teu id de afiliado')
-
-        conexion = open(nome_fich, 'r', encoding=encoding)
-        contido_fich = conexion.read()
-        conexion.close()
-
-        return contido_fich
-
-# risca por riba un texto dado
-def riscar(catex):
-    return ''.join([u'\u0336{}'.format(ele) for ele in catex])
-
-
 # cargar as variables de configuración
 def cargarConfig(nome_ficheiro='.config', elemento=0):
     config = {'id_afiliado': '',
@@ -31,7 +15,7 @@ def cargarConfig(nome_ficheiro='.config', elemento=0):
             'nome_canle1': ''
             }
     try:
-        for dato in cargarFich(nome_ficheiro).split('\n')[:-1]:
+        for dato in cargar(nome_ficheiro).split('\n')[:-1]:
             try:
                 if (not dato.startswith('#')) and dato != '':
                     dato1, dato2 = dato.strip().split('=')
