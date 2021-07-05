@@ -1,15 +1,17 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
+#------------------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	11/05/2021 13:31:33
-#+ Editado:	18/05/2021 16:54:32
-
+#+ Editado:	28/06/2021 13:51:03
+#------------------------------------------------------------------------------------------------
 import utils as u
-
 import requests as r
 import sys
 from bs4 import BeautifulSoup as bs
 import os
-
+from fake_useragent import UserAgent
+#------------------------------------------------------------------------------------------------
 # coller as opcións dadas na entrada
 def getOpcions():
     args = sys.argv[1:]
@@ -60,9 +62,10 @@ def tratarLigazon(ligazon, ref_code):
 # print info produto
 def getInfoAmazon(ligazon):
     # variables precisas para poder facer os scrapping en amazon
-    cabeceira = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/90.0.4430.93 Safari/537.36'
-            }
+    #cabeceira = {
+    #        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/90.0.4430.93 Safari/537.36'
+    #        }
+    cabeceira = {'User-Agent': UserAgent().random}
     bolacha = {'from-my': 'browser'}
 
     # request á url
@@ -93,6 +96,7 @@ def getInfoAmazon(ligazon):
 
     return tit, prezo_antes, prezo, lig_imaxe
 
+#------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
     print()
 
@@ -105,3 +109,4 @@ if __name__ == '__main__':
     printInfo(tit, prezo_antes, prezo, lig_imaxe, ref_lig)
 
     print()
+#------------------------------------------------------------------------------------------------

@@ -1,9 +1,12 @@
 #! /usr/bin/python3
+# -*- coding: utf-8 -*-
+
 #+ Autor:	Ran#
 #+ Creado:	12/05/2021 17:49:06
-#+ Editado:	12/05/2021 20:00:58
+#+ Editado:	05/07/2021 13:29:16
 
 import os
+import sys
 
 # colle un ficheiro e carga o seu contido
 def cargarFich(nome_fich, encoding='utf-8-sig'):

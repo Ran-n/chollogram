@@ -1,7 +1,9 @@
 #! /usr/bin/python3
+# -*- coding: utf-8 -*-
+
 #+ Autor:	Ran#
 #+ Creado:	12/05/2021 17:47:27
-#+ Editado:	12/05/2021 17:47:27
+#+ Editado:	05/07/2021 13:29:40
 
 import utils as u
 
