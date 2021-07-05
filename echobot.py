@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # pylint: disable=C0116
 # This program is dedicated to the public domain under the CC0 license.
 
@@ -15,6 +15,7 @@ Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
 
+import utils as u
 import logging
 
 from telegram import Update, ForceReply
@@ -26,7 +27,6 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-
 
 # Define a few command handlers. These usually take the two arguments update and
 # context.
@@ -52,7 +52,8 @@ def echo(update: Update, _: CallbackContext) -> None:
 def main() -> None:
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
-    updater = Updater("1818458723:AAEkHS2gJf_J-ljIurslKVzmxLT44B7NJhA")
+    token_bot, a = u.cargarConfig('.config', -1)
+    updater = Updater(token_bot)
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

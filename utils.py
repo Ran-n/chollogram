@@ -1,13 +1,13 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
-
+# -----------------------------------------------------------------------------------------
 #+ Autor:	Ran#
 #+ Creado:	12/05/2021 17:49:06
-#+ Editado:	05/07/2021 13:29:16
-
+#+ Editado:	05/07/2021 17:05:08
+# -----------------------------------------------------------------------------------------
 import os
 import sys
-
+# -----------------------------------------------------------------------------------------
 # colle un ficheiro e carga o seu contido
 def cargarFich(nome_fich, encoding='utf-8-sig'):
         if not os.path.isfile(nome_fich):
@@ -19,8 +19,8 @@ def cargarFich(nome_fich, encoding='utf-8-sig'):
 
         return contido_fich
 
-# tacha por riba un texto dado
-def tachar(catex):
+# risca por riba un texto dado
+def riscar(catex):
     return ''.join([u'\u0336{}'.format(ele) for ele in catex])
 
 
@@ -55,6 +55,7 @@ def cargarConfig(nome_ficheiro='.config', elemento=0):
     # 3 == 3º
     elif elemento == 3:
         return config['nome_canle1']
-
+# -----------------------------------------------------------------------------------------
 if __name__ == '__main__':
     print('Por exemplo carga do ficheiro .config: ', cargarConfig())
+# -----------------------------------------------------------------------------------------
